@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 interface Appointment {
   id: number;
+  priorityNumber: string;
   patientName: string;
   email: string;
   phone: string;
@@ -52,6 +53,7 @@ export class StaffDashboardComponent implements OnInit {
       const mockAppointments: Appointment[] = [
         {
           id: 1,
+          priorityNumber: 'A-001',
           patientName: 'Juan dela Cruz',
           email: 'juan@email.com',
           phone: '09991234567',
@@ -63,6 +65,7 @@ export class StaffDashboardComponent implements OnInit {
         },
         {
           id: 2,
+          priorityNumber: 'A-002',
           patientName: 'Maria Garcia',
           email: 'maria@email.com',
           phone: '09998765432',
@@ -74,6 +77,7 @@ export class StaffDashboardComponent implements OnInit {
         },
         {
           id: 3,
+          priorityNumber: 'A-003',
           patientName: 'Pedro Reyes',
           email: 'pedro@email.com',
           phone: '09995554433',
@@ -85,6 +89,7 @@ export class StaffDashboardComponent implements OnInit {
         },
         {
           id: 4,
+          priorityNumber: 'A-004',
           patientName: 'Ana Martinez',
           email: 'ana@email.com',
           phone: '09996661122',
@@ -96,6 +101,7 @@ export class StaffDashboardComponent implements OnInit {
         },
         {
           id: 5,
+          priorityNumber: 'A-005',
           patientName: 'Carlos Lopez',
           email: 'carlos@email.com',
           phone: '09997772233',

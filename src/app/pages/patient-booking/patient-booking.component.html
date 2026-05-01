@@ -1,12 +1,64 @@
 <div class="page-container">
   <app-header></app-header>
 
+  <!-- Confirmation Modal -->
+  @if (showModal()) {
+    <div class="modal-overlay" (click)="closeModal()">
+      <div class="confirmation-modal" (click)="$event.stopPropagation()">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2>✓ Booked Successfully</h2>
+          <button class="close-btn" (click)="closeModal()">✕</button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+          <!-- Priority Number -->
+          <div class="priority-section">
+            <p class="priority-label">Priority #</p>
+            <div class="priority-box">
+              <span class="priority-number">{{ bookingDetails()?.priorityNumber }}</span>
+            </div>
+          </div>
+
+          <!-- Appointment Details -->
+          <div class="details-section">
+            <div class="detail-item">
+              <span class="label">Service</span>
+              <span class="value">{{ bookingDetails()?.service }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Date</span>
+              <span class="value">{{ bookingDetails()?.preferredDate }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Time</span>
+              <span class="value">{{ bookingDetails()?.preferredTime }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Name</span>
+              <span class="value">{{ bookingDetails()?.fullName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button class="ui button" (click)="closeModal()">Close</button>
+          <button class="ui primary button" (click)="downloadConfirmationPDF()">
+            <i class="download icon"></i> PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
   <div class="ui container" style="margin-top: 2rem;">
     <!-- Success Message -->
     @if (successMessage()) {
       <div class="ui success message">
         <div class="header">Booking Confirmed!</div>
-        <p>Your appointment has been scheduled successfully. Check your email for confirmation details.</p>
+        <p>Your appointment has been scheduled successfully. Check the modal above for your priority number.</p>
       </div>
     }
 

@@ -84,6 +84,7 @@
             <table class="ui celled table">
               <thead>
                 <tr>
+                  <th>Priority #</th>
                   <th>Patient Name</th>
                   <th>Service</th>
                   <th>Date & Time</th>
@@ -96,6 +97,7 @@
               <tbody>
                 @for (appointment of filteredAppointments; track appointment.id) {
                   <tr>
+                    <td><strong>{{ appointment.priorityNumber }}</strong></td>
                     <td>{{ appointment.patientName }}</td>
                     <td>{{ appointment.service }}</td>
                     <td>{{ appointment.date }} at {{ appointment.time }}</td>
