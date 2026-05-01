@@ -1,0 +1,31 @@
+<div class="ui top fixed menu" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);">
+  <div class="ui container">
+    <!-- Logo -->
+    <a routerLink="/" class="header item" style="color: white; font-weight: bold; font-size: 1.3rem;">
+      <i class="hospital outline icon"></i>
+      SmartQueue
+    </a>
+
+    <!-- Menu Items -->
+    <a routerLink="/" class="item" style="color: white;">Home</a>
+    <a routerLink="/about" class="item" style="color: white;">About</a>
+    <a routerLink="/services" class="item" style="color: white;">Services</a>
+    <a routerLink="/contact" class="item" style="color: white;">Contact</a>
+    <a routerLink="/faq" class="item" style="color: white;">FAQ</a>
+    
+    <!-- Right aligned booking button -->
+    <div class="right menu">
+      <a routerLink="/booking" class="item" style="color: white; background: rgba(255, 255, 255, 0.2); border-radius: 5px; margin: 10px;">
+        <i class="calendar check icon"></i>
+        Book Now
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Add padding to account for fixed menu -->
+<style>
+  :host {
+    --spacing-top: 0;
+  }
+</style>

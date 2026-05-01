@@ -1,0 +1,145 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.login-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem 2rem;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header .ui.icon {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.login-header i.icon {
+  color: #667eea;
+}
+
+.login-header h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.login-header p {
+  color: #999;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.ui.large.form {
+  font-size: 1rem;
+}
+
+.ui.form .field .ui.input input {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+}
+
+.ui.form .field .ui.input input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.ui.form .field.error .ui.input input {
+  border-color: #e0b4b4;
+  background-color: #fff6f6;
+}
+
+.ui.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.ui.checkbox input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.ui.checkbox label {
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ui.fluid.large.primary.button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.ui.fluid.large.primary.button:hover:not(.loading):not(:disabled) {
+  background: linear-gradient(135deg, #5568d3 0%, #653a8a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.ui.fluid.large.primary.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ui.info.message {
+  background-color: #f8f9ff;
+  border-left: 4px solid #667eea;
+  border-radius: 4px;
+}
+
+.ui.error.message {
+  background-color: #fff6f6;
+  border-left: 4px solid #db2828;
+  border-radius: 4px;
+}
+
+a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.right.floated.icon {
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+  padding-right: 1rem;
+}
+
+.right.floated.icon:hover {
+  color: #667eea;
+}

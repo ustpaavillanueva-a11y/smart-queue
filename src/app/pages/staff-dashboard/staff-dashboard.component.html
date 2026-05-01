@@ -1,0 +1,146 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="ui container">
+      <h1>Staff Dashboard</h1>
+      <p class="welcome">Welcome back, {{ staffName() }}!</p>
+    </div>
+  </div>
+
+  <div class="ui container" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <!-- Statistics Cards -->
+    <div class="ui three column grid">
+      <div class="column">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="large calendar icon"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats().todayAppointments }}</h3>
+            <p>Today's Appointments</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="large chart line icon"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats().thisWeekAppointments }}</h3>
+            <p>This Week</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="large hourglass start icon"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats().pendingAppointments }}</h3>
+            <p>Pending</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appointments Section -->
+    <div class="ui segment" style="margin-top: 2rem;">
+      <div class="section-header">
+        <h2>Appointments</h2>
+        <button class="ui mini button" (click)="loadDashboardData()">
+          <i class="sync alternate icon"></i>
+          Refresh
+        </button>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="filter-buttons" style="margin-bottom: 1rem;">
+        <button class="ui mini button"
+                [class.primary]="selectedFilter() === 'all'"
+                (click)="setFilter('all')">
+          All Appointments
+        </button>
+        <button class="ui mini button"
+                [class.primary]="selectedFilter() === 'today'"
+                (click)="setFilter('today')">
+          Today
+        </button>
+        <button class="ui mini button"
+                [class.primary]="selectedFilter() === 'pending'"
+                (click)="setFilter('pending')">
+          Pending
+        </button>
+      </div>
+
+      @if (loading()) {
+        <div class="ui active centered inline loader" style="margin: 2rem 0;"></div>
+      } @else {
+        @if (filteredAppointments.length > 0) {
+          <div class="ui scrollable table">
+            <table class="ui celled table">
+              <thead>
+                <tr>
+                  <th>Patient Name</th>
+                  <th>Service</th>
+                  <th>Date & Time</th>
+                  <th>Contact</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (appointment of filteredAppointments; track appointment.id) {
+                  <tr>
+                    <td>{{ appointment.patientName }}</td>
+                    <td>{{ appointment.service }}</td>
+                    <td>{{ appointment.date }} at {{ appointment.time }}</td>
+                    <td>
+                      <div class="contact-info">
+                        <div>{{ appointment.email }}</div>
+                        <div>{{ appointment.phone }}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <span [class]="getStatusClass(appointment.status)">
+                        {{ appointment.status | uppercase }}
+                      </span>
+                    </td>
+                    <td>{{ appointment.notes }}</td>
+                    <td>
+                      @if (appointment.status === 'pending') {
+                        <button class="ui mini green button"
+                                (click)="updateStatus(appointment.id, 'confirmed')">
+                          Confirm
+                        </button>
+                      } @else if (appointment.status === 'confirmed') {
+                        <button class="ui mini blue button"
+                                (click)="updateStatus(appointment.id, 'completed')">
+                          Complete
+                        </button>
+                      }
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <div class="ui info message">
+            <div class="header">No Appointments Found</div>
+            <p>There are no appointments matching your filter criteria.</p>
+          </div>
+        }
+      }
+    </div>
+
+    <!-- Logout Button -->
+    <div style="text-align: right; margin-top: 2rem;">
+      <button class="ui button" (click)="logout()">
+        <i class="sign out icon"></i>
+        Logout
+      </button>
+    </div>
+  </div>
+</div>

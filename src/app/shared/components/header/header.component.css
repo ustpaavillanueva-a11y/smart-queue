@@ -1,0 +1,35 @@
+::ng-deep .ui.top.fixed.menu {
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+::ng-deep .ui.top.fixed.menu .item {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .ui.top.fixed.menu .item:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+::ng-deep .ui.top.fixed.menu .item.active {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.15) !important;
+  border-bottom: 2px solid white;
+}
+
+::ng-deep .ui.top.fixed.menu .header.item {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+::ng-deep .ui.top.fixed.menu .container {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep body {
+  padding-top: 50px;
+}

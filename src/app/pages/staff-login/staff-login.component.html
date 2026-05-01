@@ -1,0 +1,107 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="ui container">
+      <!-- Logo/Header -->
+      <div class="login-header">
+        <div class="ui icon">
+          <i class="large lock icon"></i>
+        </div>
+        <h1>Staff Login</h1>
+        <p>SmartQueue Hospital Management System</p>
+      </div>
+
+      <!-- Error Message -->
+      @if (errorMessage()) {
+        <div class="ui error message">
+          <div class="header">Login Failed</div>
+          <p>{{ errorMessage() }}</p>
+        </div>
+      }
+
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="ui large form">
+        <!-- Email Field -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['email'].invalid }">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="email"
+                   placeholder="Email Address"
+                   formControlName="email"
+                   [attr.readonly]="loading() ? true : null">
+          </div>
+          @if (submitted() && f['email'].invalid) {
+            <span class="ui error message" style="display: block; margin-top: 0.5rem;">
+              @if (f['email'].errors?.['required']) {
+                Email is required
+              }
+              @if (f['email'].errors?.['email']) {
+                Please enter a valid email
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Password Field -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['password'].invalid }">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input [type]="showPassword() ? 'text' : 'password'"
+                   placeholder="Password"
+                   formControlName="password"
+                   [attr.readonly]="loading() ? true : null">
+            <i class="right floated link icon"
+               (click)="togglePasswordVisibility()"
+               [ngClass]="showPassword() ? 'eye slash' : 'eye'"></i>
+          </div>
+          @if (submitted() && f['password'].invalid) {
+            <span class="ui error message" style="display: block; margin-top: 0.5rem;">
+              @if (f['password'].errors?.['required']) {
+                Password is required
+              }
+              @if (f['password'].errors?.['minlength']) {
+                Password must be at least 6 characters
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Remember Me Checkbox -->
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="checkbox" formControlName="rememberMe">
+            <label>Remember me</label>
+          </div>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit"
+                class="ui fluid large primary button"
+                [class.loading]="loading()"
+                [attr.disabled]="loading() ? true : null">
+          @if (loading()) {
+            <i class="spinner icon"></i>
+            Logging in...
+          } @else {
+            Sign in
+          }
+        </button>
+      </form>
+
+      <!-- Demo Credentials Info -->
+      <div class="ui info message" style="margin-top: 2rem;">
+        <div class="header">Demo Credentials</div>
+        <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+          <li>Staff: staff@hospital.com / password123</li>
+          <li>Admin: admin@hospital.com / password123</li>
+        </ul>
+      </div>
+
+      <!-- Footer Link -->
+      <div class="ui center aligned container" style="margin-top: 2rem;">
+        <p>
+          <a routerLink="/">← Back to Home</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

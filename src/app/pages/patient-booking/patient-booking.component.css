@@ -1,0 +1,80 @@
+.page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 0 2rem 0;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ui.segment {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ui.form .field label {
+  font-weight: 600;
+  color: #333;
+}
+
+.ui.form input,
+.ui.form select,
+.ui.form textarea {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.ui.form input:focus,
+.ui.form select:focus,
+.ui.form textarea:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.ui.form .field.error input,
+.ui.form .field.error select,
+.ui.form .field.error textarea {
+  border-color: #e0b4b4;
+  background-color: #fff6f6;
+}
+
+.ui.success.message {
+  background-color: #fcfff5;
+  border-left: 4px solid #21ba45;
+}
+
+.ui.button {
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.ui.primary.button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.ui.primary.button:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #653a8a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.ui.error.message {
+  display: block !important;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+h1.ui.header {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}

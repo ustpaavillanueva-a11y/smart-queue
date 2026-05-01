@@ -1,0 +1,151 @@
+<div class="page-container">
+  <app-header></app-header>
+
+  <div class="ui container" style="margin-top: 2rem;">
+    <!-- Success Message -->
+    @if (successMessage()) {
+      <div class="ui success message">
+        <div class="header">Booking Confirmed!</div>
+        <p>Your appointment has been scheduled successfully. Check your email for confirmation details.</p>
+      </div>
+    }
+
+    <!-- Error Message -->
+    @if (errorMessage()) {
+      <div class="ui error message">
+        <div class="header">Error</div>
+        <p>{{ errorMessage() }}</p>
+      </div>
+    }
+
+    <div class="ui segment">
+      <h1 class="ui header">Schedule Your Appointment</h1>
+      <p class="subtitle">Book your hospital appointment online and get a priority number</p>
+
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="ui form">
+        <!-- Full Name -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['fullName'].invalid }">
+          <label>Full Name *</label>
+          <input type="text" 
+                 placeholder="Enter your full name"
+                 formControlName="fullName">
+          @if (submitted() && f['fullName'].invalid) {
+            <span class="ui error message" style="display: block;">
+              @if (f['fullName'].errors?.['required']) {
+                Full name is required
+              }
+              @if (f['fullName'].errors?.['minlength']) {
+                Full name must be at least 3 characters
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['email'].invalid }">
+          <label>Email Address *</label>
+          <input type="email" 
+                 placeholder="Enter your email"
+                 formControlName="email">
+          @if (submitted() && f['email'].invalid) {
+            <span class="ui error message" style="display: block;">
+              @if (f['email'].errors?.['required']) {
+                Email is required
+              }
+              @if (f['email'].errors?.['email']) {
+                Please enter a valid email
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Phone -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['phone'].invalid }">
+          <label>Phone Number *</label>
+          <input type="tel" 
+                 placeholder="Enter your phone number"
+                 formControlName="phone">
+          @if (submitted() && f['phone'].invalid) {
+            <span class="ui error message" style="display: block;">
+              @if (f['phone'].errors?.['required']) {
+                Phone number is required
+              }
+              @if (f['phone'].errors?.['pattern']) {
+                Please enter a valid phone number (at least 10 digits)
+              }
+            </span>
+          }
+        </div>
+
+        <!-- Service Type -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['service'].invalid }">
+          <label>Service Type *</label>
+          <select formControlName="service" class="ui dropdown">
+            <option value="">-- Select Service --</option>
+            @for (service of services; track service.id) {
+              <option [value]="service.id">{{ service.name }}</option>
+            }
+          </select>
+          @if (submitted() && f['service'].invalid) {
+            <span class="ui error message" style="display: block;">Service is required</span>
+          }
+        </div>
+
+        <!-- Preferred Date -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['preferredDate'].invalid }">
+          <label>Preferred Date *</label>
+          <input type="date" 
+                 [min]="getMinDate()"
+                 formControlName="preferredDate">
+          @if (submitted() && f['preferredDate'].invalid) {
+            <span class="ui error message" style="display: block;">Preferred date is required</span>
+          }
+        </div>
+
+        <!-- Preferred Time -->
+        <div class="field" [ngClass]="{ 'error': submitted() && f['preferredTime'].invalid }">
+          <label>Preferred Time *</label>
+          <select formControlName="preferredTime" class="ui dropdown">
+            <option value="">-- Select Time --</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="15:00">03:00 PM</option>
+            <option value="16:00">04:00 PM</option>
+          </select>
+          @if (submitted() && f['preferredTime'].invalid) {
+            <span class="ui error message" style="display: block;">Preferred time is required</span>
+          }
+        </div>
+
+        <!-- Notes -->
+        <div class="field">
+          <label>Additional Notes</label>
+          <textarea placeholder="Any additional information..." 
+                    formControlName="notes"
+                    rows="4"></textarea>
+        </div>
+
+        <!-- Buttons -->
+        <div class="field">
+          <button type="submit" 
+                  class="ui primary button"
+                  [class.loading]="loading()">
+            @if (loading()) {
+              <i class="spinner icon"></i>
+              Booking...
+            } @else {
+              Book Appointment
+            }
+          </button>
+          <button type="button" 
+                  class="ui button"
+                  (click)="resetForm()">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

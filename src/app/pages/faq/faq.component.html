@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<div class="ui container" style="margin-top: 100px; margin-bottom: 50px;">
+  <!-- Hero Section -->
+  <div class="ui segment" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: white; padding: 60px 30px; border-radius: 10px; margin-bottom: 40px;">
+    <div class="ui center aligned">
+      <h1 style="font-size: 2.5rem; margin-bottom: 10px; color: white;">Frequently Asked Questions</h1>
+      <p style="font-size: 1.2rem;">Find Answers to Common Questions</p>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div style="margin-bottom: 40px;">
+    <div class="ui search">
+      <div class="ui icon input" style="width: 100%;">
+        <input class="prompt" type="text" placeholder="Search FAQs...">
+        <i class="search icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Accordion -->
+  <div class="faq-container">
+    <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.open]="faq.open">
+      <div class="faq-question" (click)="toggleFAQ(i)">
+        <h3>{{ faq.question }}</h3>
+        <i [class]="faq.open ? 'chevron up icon' : 'chevron down icon'"></i>
+      </div>
+      <div class="faq-answer" *ngIf="faq.open">
+        <p>{{ faq.answer }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Still Have Questions -->
+  <div class="ui segment" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: white; padding: 60px 30px; border-radius: 10px; text-align: center; margin-top: 60px;">
+    <h2 style="color: white;">Still Have Questions?</h2>
+    <p style="font-size: 1.1rem; margin: 20px 0;">Our customer support team is here to help. Reach out to us anytime.</p>
+    <button class="ui inverted button" style="padding: 15px 40px; font-size: 1rem; background: white; color: #10b981; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px;" routerLink="/contact">
+      <i class="envelope icon"></i>
+      Contact Us
+    </button>
+  </div>
+</div>

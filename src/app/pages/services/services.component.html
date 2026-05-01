@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="ui container" style="margin-top: 100px; margin-bottom: 50px;">
+  <!-- Hero Section -->
+  <div class="ui segment" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: white; padding: 60px 30px; border-radius: 10px; margin-bottom: 40px;">
+    <div class="ui center aligned">
+      <h1 style="font-size: 2.5rem; margin-bottom: 10px; color: white;">Our Services</h1>
+      <p style="font-size: 1.2rem;">Comprehensive Healthcare Solutions for Your Wellness</p>
+    </div>
+  </div>
+
+  <!-- Services Grid -->
+  <div class="ui four column grid">
+    <div class="column" *ngFor="let service of services">
+      <div class="service-card">
+        <div class="service-icon">
+          <i [class]="'large ' + service.icon + ' icon'"></i>
+        </div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Features -->
+  <div style="margin-top: 60px; margin-bottom: 40px;">
+    <h2 style="text-align: center; color: #10b981; margin-bottom: 40px;">Why Choose Our Services?</h2>
+    <div class="ui three column grid">
+      <div class="column">
+        <div class="feature-card">
+          <i class="large hospital outline icon" style="color: #10b981;"></i>
+          <h4>Modern Facilities</h4>
+          <p>State-of-the-art medical equipment and comfortable patient environments.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="feature-card">
+          <i class="large certificate icon" style="color: #047857;"></i>
+          <h4>Certified Experts</h4>
+          <p>All healthcare providers are board-certified and highly experienced.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="feature-card">
+          <i class="large shield alternate icon" style="color: #10b981;"></i>
+          <h4>Quality Assured</h4>
+          <p>Adherence to international healthcare standards and patient safety protocols.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="ui segment" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: white; padding: 60px 30px; border-radius: 10px; text-align: center;">
+    <h2 style="color: white;">Ready to Book a Service?</h2>
+    <a routerLink="/booking" class="ui inverted button" style="padding: 15px 40px; font-size: 1rem; background: white; color: #10b981; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 20px; display: inline-block; text-decoration: none;">
+      <i class="calendar check icon"></i>
+      Schedule Your Appointment
+    </a>
+  </div>
+</div>

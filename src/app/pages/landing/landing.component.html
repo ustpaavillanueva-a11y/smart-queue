@@ -1,0 +1,122 @@
+<app-header></app-header>
+
+<!-- Header -->
+<div class="header-section">
+  <div class="ui container">
+    <div class="logo">
+      <i class="large hospital outline icon"></i>
+      <h1>SmartQueue</h1>
+      <p class="tagline">Hospital Patient Scheduling System</p>
+    </div>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<div class="hero-section" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);">
+  <div class="ui container">
+    <div class="hero-wrapper">
+      <div class="hero-content">
+        <h2>Welcome to Our Hospital</h2>
+        <p class="hero-subtitle">Your health is our priority. Schedule your appointment with ease and get priority care.</p>
+        <button routerLink="/booking" class="ui large primary button">
+          <i class="calendar check icon"></i>
+          Book Your Appointment Now
+        </button>
+      </div>
+      <div class="hero-image">
+        <img src="/hospital.jpg" alt="Hospital Building">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section">
+  <div class="ui container">
+    <h3 class="section-title">Why Choose Us?</h3>
+    <div class="ui four column grid">
+      @for (feature of features; track feature.title) {
+        <div class="column">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i [class]="'large ' + feature.icon + ' icon'"></i>
+            </div>
+            <h4>{{ feature.title }}</h4>
+            <p>{{ feature.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Announcements Section -->
+<div class="announcements-section">
+  <div class="ui container">
+    <h3 class="section-title">Latest Announcements</h3>
+    <div class="ui cards">
+      @for (announcement of announcements; track announcement.id) {
+        <div class="card">
+          <div class="content">
+            <div class="announcement-header">
+              <i [class]="announcement.icon + ' icon'"></i>
+              <h4 class="ui header">{{ announcement.title }}</h4>
+            </div>
+            <div class="description">{{ announcement.description }}</div>
+            <div class="meta">{{ announcement.date | date: 'MMM dd, yyyy' }}</div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section">
+  <div class="ui container">
+    <div class="cta-content">
+      <h3>Ready to Book Your Appointment?</h3>
+      <p>Join thousands of patients who trust SmartQueue for hassle-free appointment scheduling.</p>
+      <button routerLink="/booking" class="ui massive primary button">
+        <i class="arrow right icon"></i>
+        Book Your Schedule
+      </button>
+      <p class="secondary-text">
+        Staff member? <a routerLink="/staff/login">Login here</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-section">
+  <div class="ui container">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h4>SmartQueue Hospital</h4>
+        <p>Providing quality healthcare services since 1995</p>
+        <p>📞 +63-123-456-7890 | 📧 info@smartqueue.hospital</p>
+        <p>📍 123 Healthcare Avenue, Medical City</p>
+      </div>
+      <div class="footer-hours">
+        <h4>Operating Hours</h4>
+        <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+        <p>Saturday: 9:00 AM - 4:00 PM</p>
+        <p>Sunday: 10:00 AM - 2:00 PM</p>
+        <p><strong>Emergency: 24/7</strong></p>
+      </div>
+      <div class="footer-services">
+        <h4>Services</h4>
+        <p>General Check-up</p>
+        <p>Dental Care</p>
+        <p>Eye Care</p>
+        <p>Laboratory</p>
+        <p>Imaging</p>
+        <p>Telemedicine</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SmartQueue Hospital. All rights reserved.</p>
+    </div>
+  </div>
+</div>
