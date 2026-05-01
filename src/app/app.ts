@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { FirebaseService } from './services/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,13 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   readonly title = 'smart-queue';
+
+  constructor(private firebaseService: FirebaseService) {}
+
+  ngOnInit() {
+    // Initialize default admin account if none exists
+    this.firebaseService.initializeDefaultAdmin();
+  }
 }

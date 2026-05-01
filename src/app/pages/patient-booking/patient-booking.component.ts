@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HeaderComponent } from '../../shared/components/header/header.component';
+import { FirebaseService } from '../../services/firebase.service';
 
 interface BookingDetails {
   priorityNumber: string;
@@ -39,7 +40,7 @@ export class PatientBookingComponent {
     { id: 6, name: 'Consultation' }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private firebaseService: FirebaseService) {
     this.bookingForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -75,27 +76,41 @@ export class PatientBookingComponent {
 
     this.loading.set(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    const formValue = this.bookingForm.value;
+    const priorityNumber = this.generatePriorityNumber();
+    const booking: BookingDetails = {
+      priorityNumber: priorityNumber,
+      fullName: formValue.fullName,
+      email: formValue.email,
+      phone: formValue.phone,
+      service: this.getServiceName(formValue.service),
+      preferredDate: formValue.preferredDate,
+      preferredTime: formValue.preferredTime,
+      bookingDate: new Date().toLocaleString()
+    };
+
+    // Save to Firebase
+    this.firebaseService.addAppointment({
+      fullName: booking.fullName,
+      email: booking.email,
+      phone: booking.phone,
+      service: booking.service,
+      preferredDate: booking.preferredDate,
+      preferredTime: booking.preferredTime,
+      priorityNumber: booking.priorityNumber,
+      notes: formValue.notes || '',
+      status: 'pending'
+    }).then(() => {
       this.loading.set(false);
-      
-      // Generate booking details with priority number
-      const formValue = this.bookingForm.value;
-      const booking: BookingDetails = {
-        priorityNumber: this.generatePriorityNumber(),
-        fullName: formValue.fullName,
-        email: formValue.email,
-        phone: formValue.phone,
-        service: this.getServiceName(formValue.service),
-        preferredDate: formValue.preferredDate,
-        preferredTime: formValue.preferredTime,
-        bookingDate: new Date().toLocaleString()
-      };
-      
       this.bookingDetails.set(booking);
       this.showModal.set(true);
       this.successMessage.set(true);
-    }, 1500);
+      this.errorMessage.set('');
+    }).catch(error => {
+      this.loading.set(false);
+      this.errorMessage.set('Failed to save appointment: ' + error.message);
+      console.error('Firebase error:', error);
+    });
   }
 
   downloadConfirmationPDF() {

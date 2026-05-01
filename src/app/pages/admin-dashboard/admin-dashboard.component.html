@@ -62,38 +62,84 @@
     <div class="ui segment" style="margin-top: 2rem;">
       <div class="section-header">
         <h2>Staff Members</h2>
-        <button class="ui mini primary button" (click)="loadDashboardData()">
-          <i class="sync alternate icon"></i>
-          Refresh
-        </button>
+        <div style="display: flex; gap: 1rem;">
+          <button class="ui mini primary button" (click)="toggleCreateStaffForm()">
+            <i class="plus icon"></i>
+            Add Staff
+          </button>
+          <button class="ui mini button" (click)="loadDashboardData()">
+            <i class="sync alternate icon"></i>
+            Refresh
+          </button>
+        </div>
       </div>
+
+      @if (errorMessage()) {
+        <div class="ui error message">
+          <div class="header">Error</div>
+          <p>{{ errorMessage() }}</p>
+        </div>
+      }
+
+      <!-- Create Staff Form -->
+      @if (showCreateStaffForm()) {
+        <div class="ui segment" style="background-color: #f9f9f9; margin-bottom: 2rem;">
+          <h3>Create New Staff Account</h3>
+          <form [formGroup]="createStaffForm" class="ui form">
+            <div class="two fields">
+              <div class="field" [ngClass]="{ 'error': submitted() && createStaffForm.get('staffName')?.invalid }">
+                <label>Staff Name</label>
+                <input type="text" placeholder="Full Name" formControlName="staffName">
+              </div>
+              <div class="field" [ngClass]="{ 'error': submitted() && createStaffForm.get('email')?.invalid }">
+                <label>Email</label>
+                <input type="email" placeholder="Email Address" formControlName="email">
+              </div>
+            </div>
+            <div class="field" [ngClass]="{ 'error': submitted() && createStaffForm.get('password')?.invalid }">
+              <label>Password</label>
+              <input type="password" placeholder="Minimum 6 characters" formControlName="password">
+            </div>
+            <button type="button" class="ui primary button" (click)="createStaffAccount()">
+              Create Account
+            </button>
+            <button type="button" class="ui button" (click)="toggleCreateStaffForm()">
+              Cancel
+            </button>
+          </form>
+        </div>
+      }
 
       @if (loading()) {
         <div class="ui active centered inline loader" style="margin: 2rem 0;"></div>
       } @else {
-        <div class="ui relaxed divided list">
-          @for (staff of staffMembers(); track staff.id) {
-            <div class="item">
-              <div class="right floated content">
-                <span [class]="getStatusClass(staff.status)">
-                  {{ staff.status | uppercase }}
-                </span>
-              </div>
-              <i [class]="'icon ' + getRoleIcon(staff.role) + ' ' + getRoleColor(staff.role)"></i>
-              <div class="content">
-                <div class="header">{{ staff.name }}</div>
-                <div class="description">
-                  <span class="ui label">{{ staff.role | titlecase }}</span>
-                  <span style="margin: 0 0.5rem;">{{ staff.email }}</span>
+        @if (staffMembers().length === 0) {
+          <div class="ui info message">
+            <div class="header">No staff members yet</div>
+            <p>Click "Add Staff" to create staff accounts.</p>
+          </div>
+        } @else {
+          <div class="ui relaxed divided list">
+            @for (staff of staffMembers(); track staff.id) {
+              <div class="item">
+                <div class="right floated content">
+                  <button class="ui mini red button" (click)="deleteStaffMember(staff.id)">
+                    <i class="trash icon"></i>
+                    Delete
+                  </button>
                 </div>
-                <div class="extra" style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;">
-                  <i class="clock outline icon"></i>
-                  {{ staff.appointmentsToday }} appointments today
+                <i class="icon user"></i>
+                <div class="content">
+                  <div class="header">{{ staff.name }}</div>
+                  <div class="description">
+                    <span class="ui label">{{ staff.email }}</span>
+                    <span style="margin: 0 0.5rem; color: #10b981; font-weight: bold;">Staff Member</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          }
-        </div>
+            }
+          </div>
+        }
       }
     </div>
 

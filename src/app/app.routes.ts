@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
 import { PatientBookingComponent } from './pages/patient-booking/patient-booking.component';
 import { StaffDashboardComponent } from './pages/staff-dashboard/staff-dashboard.component';
 import { StaffLoginComponent } from './pages/staff-login/staff-login.component';
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'booking', component: PatientBookingComponent },
   { path: 'staff/login', component: StaffLoginComponent },
   { path: 'staff/dashboard', component: StaffDashboardComponent },
+  { path: 'admin/login', component: AdminLoginComponent },
   { path: 'admin/dashboard', component: AdminDashboardComponent },
   { path: '**', redirectTo: '' }
 ];
