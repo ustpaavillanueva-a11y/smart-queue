@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
   padding: 2rem;
 }
 
@@ -26,6 +26,28 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.login-header {
+  margin-bottom: 2rem;
+}
+
+.highlight-banner {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.hospital-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .login-header {
